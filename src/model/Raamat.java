@@ -5,6 +5,7 @@ public class Raamat {
     private int raamatuId;
     private String pealkiri;
     private String autor;
+    private String aasta;
     private ZhanriModel zhanr;
     private boolean clicked;
     private String laenutaja;
@@ -13,6 +14,7 @@ public class Raamat {
                   String laenutaja) {
         this.pealkiri = pealkiri;
         this.autor = autor;
+        this.aasta = aasta;
         this.zhanr = zhanr;
         this.clicked = clicked;
         this.laenutaja = laenutaja;
@@ -74,5 +76,13 @@ public class Raamat {
 
     public void setLaenutaja(String laenutaja) {
         this.laenutaja = laenutaja;
+    }
+
+    public String getAasta() {
+        return aasta;
+    }
+
+    public void setAasta(String aasta) {
+        this.aasta = aasta;
     }
 }

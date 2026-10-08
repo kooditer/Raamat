@@ -7,6 +7,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
 public class FormPanel extends JPanel {
@@ -47,12 +48,18 @@ public class FormPanel extends JPanel {
         laenutajaField = new JTextField(10);
         saveBtn = new JButton("Salvesta");
 
+        saveBtn.setMnemonic(KeyEvent.VK_S);
+        pealkiriLabel.setDisplayedMnemonic(KeyEvent.VK_P);
+        pealkiriLabel.setLabelFor(pealkiriField);
+
+
+
         DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel<>();
         comboBoxModel.addElement(new ZhanriKategooria(0, "Luuletused"));
-        comboBoxModel.addElement(new ZhanriKategooria(0, "Eneseabi"));
-        comboBoxModel.addElement(new ZhanriKategooria(0, "Lasteraamat"));
-        comboBoxModel.addElement(new ZhanriKategooria(0, "Elulood"));
-        comboBoxModel.addElement(new ZhanriKategooria(0, "Õpperaamat"));
+        comboBoxModel.addElement(new ZhanriKategooria(1, "Eneseabi"));
+        comboBoxModel.addElement(new ZhanriKategooria(2, "Lasteraamat"));
+        comboBoxModel.addElement(new ZhanriKategooria(3, "Elulood"));
+        comboBoxModel.addElement(new ZhanriKategooria(4, "Õpperaamat"));
         zhanrCombo.setModel(comboBoxModel);
         zhanrCombo.setSelectedIndex(0);
 

@@ -10,12 +10,13 @@ import java.util.List;
 public class Controller {
     Database db = new Database();
 
+
     public List<Raamat> getRRaamat() {//vajalik tabeli jaoks
         return db.getRaamatud();
     }
 
 
-    public void makeRaamat(FormEvent ev) {
+    public void makeRRaamat(FormEvent ev) {
         String pealkiri = ev.getPealkiri();
         String autor = ev.getAutor();
         String aasta = ev.getAasta();
