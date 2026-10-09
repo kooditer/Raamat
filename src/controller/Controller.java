@@ -5,6 +5,8 @@ import model.Database;
 import model.Raamat;
 import model.ZhanriModel;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class Controller {
@@ -13,6 +15,10 @@ public class Controller {
 
     public List<Raamat> getRRaamat() {//vajalik tabeli jaoks
         return db.getRaamatud();
+    }
+
+    public void removeRaamat(int index) {
+        db.removeRaamat(index);
     }
 
 
@@ -46,7 +52,14 @@ public class Controller {
         Raamat raamat = new Raamat(pealkiri, autor, aasta, zhanriModel, laenutatudcheck, laenutaja);
         db.addRaamat(raamat);
 
+    }
 
+    public void saveToFile(File file) throws IOException {
+        db.saveTofile(file);
+    }
+
+    public void loadFromFile(File file) throws IOException {
+        db.loadFromFile(file);
 
     }
 

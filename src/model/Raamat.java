@@ -1,6 +1,8 @@
 package model;
 
-public class Raamat {
+import java.io.Serializable;
+
+public class Raamat implements Serializable{
     private static int count = 0;
     private int raamatuId;
     private String pealkiri;
