@@ -6,7 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class MainFrame extends JFrame {
     private TextPanel textPanel;
@@ -35,12 +37,13 @@ public class MainFrame extends JFrame {
         add(toolbar, BorderLayout.NORTH);
         add(tablePanel, BorderLayout.CENTER);
 
-        setJMenuBar(createMenuBar());
-
         tablePanel.setData(controller.getRRaamat());
+        tablePanel.setRaamatTableListener(new RaamatTableListener() {
+            public void rowDeleted(int row){
+                controller.removeRaamat(row);
 
-
-
+            }
+        });
 
         //add(textPanel, BorderLayout.CENTER);
 
@@ -63,9 +66,7 @@ public class MainFrame extends JFrame {
             }
         });
 
-
-
-
+        setJMenuBar(createMenuBar());
 
         setMinimumSize(new Dimension(700,500));
         setSize(600, 400);
@@ -109,7 +110,15 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (fileChooser.showOpenDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(fileChooser.getSelectedFile());
+                    try {
+                        controller.loadFromFile(fileChooser.getSelectedFile());
+                        tablePanel.refresh();
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(MainFrame.this,
+                                "Faili ei õnnestunud üleslaadida.", "ERROR",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                    //System.out.println(fileChooser.getSelectedFile());
                 }
             }
         });
@@ -118,13 +127,23 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (fileChooser.showSaveDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(fileChooser.getSelectedFile());
+                    try {
+                        controller.saveToFile(fileChooser.getSelectedFile());
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(MainFrame.this,
+                                "Andmeid ei saanud faili salvestada.",
+                                "ERROR",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                    //System.out.println(fileChooser.getSelectedFile());
                 }
             }
         });
 
         fileMenu.setMnemonic(KeyEvent.VK_F);
         exitItem.setMnemonic(KeyEvent.VK_X);
+
+        importData.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK));
 
         exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
 

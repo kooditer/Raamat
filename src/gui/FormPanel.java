@@ -79,7 +79,7 @@ public class FormPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String pealkiri = pealkiriField.getText();
                 String autor = autorField.getText();
-                String aasta = aastaLabel.getText();
+                String aasta = aastaField.getText();
                 ZhanriKategooria zhanr = (ZhanriKategooria) zhanrCombo.getSelectedItem();
                 boolean laenutatud = laenutusCheckbox.isSelected();
                 String laenutaja = laenutajaField.getText();
@@ -90,9 +90,14 @@ public class FormPanel extends JPanel {
                 if (formListener != null) {
                     formListener.formEventOccured(ev);
 
-
                 }
-
+                pealkiriField.setText("");
+                autorField.setText("");
+                aastaField.setText("");
+                laenutusCheckbox.setSelected(false);
+                laenutajaField.setText("");
+                laenutajaLabel.setEnabled(false);
+                laenutajaField.setEnabled(false);
 
             }
         });
